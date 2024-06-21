@@ -1,9 +1,11 @@
 import React from 'react';
 
-export const App = () => {
+const Slices = () => {
     return (
         <div>
-          MoviesApp
+
         </div>
     );
 };
+
+export default Slices;

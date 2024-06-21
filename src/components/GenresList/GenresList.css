@@ -1,0 +1,38 @@
+@import "../../styles.css";
+
+.heading {
+    margin: 30px 0;
+    text-align: center;
+    color: #fff;
+}
+.genres-container{
+    padding: 0 240px;
+}
+
+.genres {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.genres__el {
+    background-color: #363636;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 15px 30px;
+    margin: 15px;
+    color: #fff;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    flex: 1 1 calc(33% - 30px);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.genres__el:hover {
+    cursor: pointer;
+    background-color: #444;
+    border: 1px solid #007bff;
+}

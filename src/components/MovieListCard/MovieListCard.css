@@ -1,0 +1,34 @@
+
+
+.list__card{
+    position: relative;
+    background-color: #3D3D3D;
+    margin: 0 auto;
+    color: #ffffff;
+    width: 200px;
+    height: 365px;
+    transition:transform .45s;
+}
+
+.list__card:hover{
+    transform: scale(105%);
+    border: 1px solid #007bff;
+
+}
+.poster{
+    width: 100%;
+    height: 300px;
+}
+
+.list__card-title{
+    font-size: 14px;
+    overflow: hidden;
+    text-transform: uppercase;
+    padding: 2px 2px;
+    color: #fff;
+    width: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
