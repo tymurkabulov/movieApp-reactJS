@@ -1,0 +1,16 @@
+
+body{
+     background-color: #1F1F1F;
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     color: #ffffff;
+ }
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
