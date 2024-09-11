@@ -9,7 +9,7 @@ import ReactSwitch from "react-switch";
 
 const Header = () => {
 
-    const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'light');
+    const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'dark');
     const [trig, setTrig] = useState<boolean>(false);
 
     const changeTrig = () => {
