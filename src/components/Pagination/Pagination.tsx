@@ -1,30 +1,51 @@
-import React from 'react';
-import './Pagination.css'
+import React, { useEffect } from 'react';
+import { useParams, useSearchParams } from "react-router-dom";
+import { useAppDispatch } from "../../hooks";
+import { genreActions, movieActions } from "../../store";
+import styles from './Pagination.module.css';
 
-interface PaginationProps {
-    currentPage: number;
-    totalPages: number;
-    onPageChange: (page: number) => void;
-}
+const Pagination = () => {
+    const dispatch = useAppDispatch();
+    const { genreId, querySearch } = useParams();
+    const [query, setQuery] = useSearchParams({ page: '1' });
+    const pageNum = query.get('page') ?? '1'; // Используем '1' как значение по умолчанию, если pageNum равно null
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+    useEffect(() => {
+        if (genreId) {
+            dispatch(genreActions.getByGenreId({ genreId: +genreId, page: +pageNum }))
+        } else if (querySearch) {
+            dispatch(movieActions.search({ querySearch, page: +pageNum }))
+        } else {
+            dispatch(movieActions.getAll({ page: +pageNum }))
+        }
+    }, [pageNum, genreId, querySearch, dispatch]);
+
+    const prevHandler = () => {
+        setQuery(prev => {
+            const currentPage = prev.get('page');
+            if (currentPage !== null) {
+                prev.set('page', `${+currentPage - 1}`);
+            }
+            return prev;
+        });
+    };
+
+    const nextHandler = () => {
+        setQuery(prev => {
+            const currentPage = prev.get('page');
+            if (currentPage !== null) {
+                prev.set('page', `${+currentPage + 1}`);
+            }
+            return prev;
+        });
+    };
+
     return (
-        <div className='pagination'>
-            <button
-                onClick={() => onPageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-            >
-                Previous
-            </button>
-            <span>{currentPage} of {totalPages}</span>
-            <button
-                onClick={() => onPageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-            >
-                Next
-            </button>
+        <div className={styles.pagination}>
+            <button className={styles.Button} disabled={+pageNum <= 1} onClick={prevHandler}>prev</button>
+            <button className={styles.Button} disabled={+pageNum >= 500} onClick={nextHandler}>next</button>
         </div>
     );
 };
 
-export default Pagination;
+export { Pagination };

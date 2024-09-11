@@ -1,10 +1,8 @@
-form {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+@import "../../index.css";
 
-input {
+
+
+.input {
     background-color: #363636;
     color: #ffffff;
     border: 2px solid #555555;
@@ -16,15 +14,15 @@ input {
     width: 300px;
 }
 
-input:focus {
+.input:focus {
     border-color: #007bff;
 }
 
-input::placeholder {
+.input::placeholder {
     color: #aaaaaa;
 }
 
-button {
+.button {
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
@@ -32,6 +30,7 @@ button {
     color: #fff;
     margin-left: 10px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

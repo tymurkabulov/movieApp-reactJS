@@ -1,20 +1,30 @@
-import React from 'react';
-import { IMovie } from '../../interfaces/IMovie';
-import './MoviesList.css';
-import MoviesListCard from "../MovieListCard/MovieListCard";
+import React, {useEffect} from 'react';
+import {useParams} from "react-router-dom";
+import styles from './MoviesList.module.css'
+import {PosterPreview} from "../PosterPreview/PosterPreview";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {movieActions} from "../../store";
 
-interface MoviesListProps {
-    movies: IMovie[];
-}
+const Movies = () => {
 
-const MoviesList: React.FC<MoviesListProps> = ({ movies }) => {
+    const {results, page} = useAppSelector(state => state.movies);
+    const dispatch = useAppDispatch();
+    const {querySearch} = useParams();
+
+    useEffect(() => {
+        if (querySearch) {
+            dispatch(movieActions.search({querySearch, page}))
+        } else {
+            dispatch(movieActions.getAll({page}))
+        }
+    }, [page, querySearch, dispatch]);
+
+
     return (
-        <div className="list">
-            {movies.map(movie => (
-                <MoviesListCard key={movie.id} movie={movie} />
-            ))}
+        <div className={styles.list} >
+            {results.map(movie => <PosterPreview movie={movie} key={movie.id}/>)}
         </div>
     );
 };
 
-export default MoviesList;
+export {Movies};

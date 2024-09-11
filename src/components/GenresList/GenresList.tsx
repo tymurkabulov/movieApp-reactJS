@@ -1,28 +1,28 @@
-import React, {FC} from 'react';
-import {useGenres} from "../../hooks/useGenres";
-import './GenresList.css'
+import React, {useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
+import styles from './GenresList.module.css'
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {genreActions} from "../../store";
 
-const GenresList:FC = () => {
-    const { genres, loading, error } = useGenres();
+const Genres = () => {
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    const {genres} = useAppSelector(state => state.genres);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+
+    useEffect(() => {
+        dispatch(genreActions.getAll())
+    }, [dispatch]);
 
     return (
-        <div className='genres-container'>
-            <h1 className='heading'>Choose your favorite genre</h1>
-            <div className='genres'>
-                {genres.map(genre => (
-                    <li key={genre.id} className='genres__el'>{genre.name}</li>
-                ))}
+        <div className={styles.genresContainer}>
+            <h1 className={styles.heading}>Choose your favorite genre</h1>
+            <div className={styles.genres}>
+                {genres.map(genre => <button className={styles.genres__el} key={genre.id} onClick={() => navigate(`/genre/${genre.id}`)}>{genre.name}</button>)}
             </div>
         </div>
     );
 };
 
-export default GenresList;
+export {Genres};

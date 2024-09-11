@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
-import './SearchBox.css'
+import React from 'react';
+import {SubmitHandler, useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
+import styles from './SearchBox.module.css'
+import {IMovie} from "../../interfaces";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {movieActions} from "../../store";
 
-interface SearchBoxProps {
-    onSearch: (query: string) => void;
-}
+const SearchBox = () => {
 
-const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
-    const [query, setQuery] = useState('');
+    const {page} = useAppSelector(state => state.movies);
+    const dispatch = useAppDispatch();
+    const {register,handleSubmit,reset} = useForm<IMovie>();
+    const navigate = useNavigate();
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(event.target.value);
-    };
-
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        onSearch(query);
+    const search:SubmitHandler<IMovie> = async(query) => {
+        if (query.title.trim() === ''){
+            navigate('/');
+            await dispatch(movieActions.search({querySearch:query.title, page}))
+        } else {
+            await dispatch(movieActions.search({querySearch:query.title, page}))
+            navigate(`/search/${query.title}`);
+        }
+        reset()
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={query}
-                onChange={handleChange}
-                placeholder="Search"
-            />
-            <button type="submit">Search</button>
+        <form onSubmit={handleSubmit(search)} className={styles.form}>
+            <input className={styles.input} type='text' placeholder={'search'} {...register('title')} />
+            <button className={styles.button}>Search</button>
         </form>
     );
 };
 
-export default SearchBox;
+export {SearchBox};

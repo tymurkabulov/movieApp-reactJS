@@ -1,32 +1,82 @@
 
-
-.list__card{
-    position: relative;
-    background-color: #3D3D3D;
-    margin: 0 auto;
-    color: #ffffff;
-    width: 200px;
-    height: 365px;
-    transition:transform .45s;
-}
-
-.list__card:hover{
-    cursor: pointer;
-    transform: scale(105%);
-    border: 1px solid #007bff;
-
-}
+@import "../../index.css";
 
 
-.list__card-title{
-    font-size: 14px;
-    overflow: hidden;
-    text-transform: uppercase;
-    padding: 2px 2px;
+
+
+.Button {
+    background-color: #333;
     color: #fff;
-    width: auto;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    border: none;
+    padding: 10px 16px;
+    margin: 11px;
+    cursor: pointer;
+}
+
+.Button:hover {
+    background-color: #555;
+    cursor: pointer;
 }
 
 
+.mainContainer {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+
+h1, h4 {
+    margin: 10px 0;
+}
+
+.posterBox{
+    display: flex;
+    justify-content: center;
+}
+
+.poster {
+    max-width: 100%;
+    height: auto;
+}
+
+.companies{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    margin-top: 20px;
+    width: 125px;
+    height: auto;
+}
+
+.movieInfo {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+
+.backButton {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.backButton:hover {
+    background-color: #555;
+    cursor: pointer;
+    border: 1px solid #007bff;
+}

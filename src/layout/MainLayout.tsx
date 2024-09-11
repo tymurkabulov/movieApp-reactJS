@@ -1,13 +1,19 @@
-import React from 'react';
-import { Outlet } from "react-router-dom";
-import Header from "../components/Header/Header";
 
-export const MainLayout = () => {
+import { Outlet } from "react-router-dom";
+import {Header} from "../components/Header/Header";
+
+
+
+
+const MainLayout = () => {
 
     return (
-        <div>
-            <Header/>
-            <Outlet />
-        </div>
+
+            <div>
+                        <Header />
+                        <Outlet />
+            </div>
     );
 };
+
+export { MainLayout };

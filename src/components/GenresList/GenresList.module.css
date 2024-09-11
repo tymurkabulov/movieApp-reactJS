@@ -1,11 +1,11 @@
-@import "../../styles.css";
+@import "../../index.css";
 
 .heading {
     margin: 30px 0;
     text-align: center;
     color: #fff;
 }
-.genres-container{
+.genresContainer{
     padding: 0 240px;
 }
 

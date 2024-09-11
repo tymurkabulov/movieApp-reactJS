@@ -1,22 +1,24 @@
 const baseURL = 'https://api.themoviedb.org/3';
-const api_key = '5485cf74ff900294c9bc547f5fbc86db';
 
-const endpoints = {
-    movies: '/discover/movie',
-    genres: '/genre/movie/list'
-};
+const movies = '/discover/movie';
+const genres = '/genre/movie/list';
+const movie = '/movie';
+const poster = 'https://image.tmdb.org/t/p/w500';
 
 const urls = {
     movies: {
-        discover: `${baseURL}${endpoints.movies}`
+        base: movies,
+        byId: (id: number): string => `${movie}/${id}`,
+        search: (querySearch: string,page:number): string => `/search/movie?query=${querySearch}&page=${page}`
     },
     genres: {
-        list: `${baseURL}${endpoints.genres}`
-    }
+        base: genres,
+        byGenreId: (genreId: number,page:number): string => `${movies}?with_genres=${genreId}&page=${page}`
+    },
+    poster
 };
 
 export {
     baseURL,
-    api_key,
     urls
-};
+}

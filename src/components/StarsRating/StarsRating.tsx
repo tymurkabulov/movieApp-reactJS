@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import './StarsRating.css';
+import StarRatings from 'react-star-ratings';
+import './StarsRating.css'
 
 interface StarsRatingProps {
     vote_average: number | undefined;
@@ -10,16 +11,16 @@ const StarsRating: FC<StarsRatingProps> = ({ vote_average }) => {
         return null;
     }
 
-    const starsTotal = 5;
-    const starPercentage = (vote_average / 10) * 100;
-    const starStyle = {
-        width: `${starPercentage}%`
-    };
+    const rating = (vote_average / 10) * 5;
 
     return (
-        <div className="stars-outer">
-            <div className="stars-inner" style={starStyle}></div>
-        </div>
+        <StarRatings
+            rating={rating}
+            starRatedColor="yellow"
+            numberOfStars={5}
+            starDimension="20px"
+            starSpacing="1px"
+        />
     );
 };
 
